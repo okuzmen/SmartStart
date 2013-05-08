@@ -1,0 +1,4 @@
+bin
+obj
+/Backend/WebApi/*.suo
+packages
