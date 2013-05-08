@@ -1,6 +1,12 @@
 language: c
-compiler:
-  - gcc
-  - clang
+
+install:
+  - sudo apt-get install mono-devel mono-gmcs
+ 
+script:
+  - xbuild ./Backend/WebApi/WebApi.sln 
+
+#  compiler:
+#  - gcc
+#  - clang
 # Change this to your needs
-script: ./configure && make
