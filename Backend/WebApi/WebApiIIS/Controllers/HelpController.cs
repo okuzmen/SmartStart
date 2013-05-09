@@ -35,9 +35,7 @@ namespace WebApiIIS.Controllers
                     return View(apiModel);
                 }
             }
-
             return View("Error");
         }
-         
     }
 }
