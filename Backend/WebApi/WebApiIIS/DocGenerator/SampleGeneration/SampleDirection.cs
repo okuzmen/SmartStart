@@ -1,4 +1,4 @@
-namespace WebApiIIS.Areas.HelpPage
+namespace WebApiIIS.DocGenerator.SampleGeneration
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

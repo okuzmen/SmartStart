@@ -7,9 +7,10 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Description;
-using WebApiIIS.Areas.HelpPage.Models;
+using WebApiIIS.DocGenerator.SampleGeneration;
+using WebApiIIS.Models;
 
-namespace WebApiIIS.Areas.HelpPage
+namespace WebApiIIS.Extensions
 {
     public static class HelpPageConfigurationExtensions
     {

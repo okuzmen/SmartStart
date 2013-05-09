@@ -1,13 +1,11 @@
-using System;
+﻿using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using WebApiIIS.Areas.HelpPage.Models;
+using WebApiIIS.Extensions;
+using WebApiIIS.Models;
 
-namespace WebApiIIS.Areas.HelpPage.Controllers
+namespace WebApiIIS.Controllers
 {
-    /// <summary>
-    /// The controller that will handle requests for the help page.
-    /// </summary>
     public class HelpController : Controller
     {
         public HelpController()
@@ -40,5 +38,6 @@ namespace WebApiIIS.Areas.HelpPage.Controllers
 
             return View("Error");
         }
+         
     }
 }

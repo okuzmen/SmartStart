@@ -1,18 +1,15 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
 
-namespace WebApiIIS.Areas.HelpPage.Models
+namespace WebApiIIS.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.
     /// </summary>
     public class HelpPageApiModel
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HelpPageApiModel"/> class.
-        /// </summary>
         public HelpPageApiModel()
         {
             SampleRequests = new Dictionary<MediaTypeHeaderValue, object>();

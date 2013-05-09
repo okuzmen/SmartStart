@@ -1,0 +1,16 @@
+@model WebApiIIS.Models.HelpPageApiModel
+
+@{
+    var description = Model.ApiDescription;
+    ViewBag.Title = description.HttpMethod.Method + " " + description.RelativePath;
+}
+
+<div id="body">
+    <section class="content-wrapper main-content clear-fix">
+        @Html.DisplayFor(m => Model)
+    </section>
+</div>
+
+@section Scripts {
+    <link type="text/css" href="~/Content/HelpPage.css" rel="stylesheet" />
+}
