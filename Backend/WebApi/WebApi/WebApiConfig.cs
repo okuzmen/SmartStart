@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using WebApi.Configuration;
 
 namespace WebApi
 {
@@ -7,7 +8,7 @@ namespace WebApi
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
+                name: ConfigurationProvider.GetRouteName(),
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApi.Configuration;
 using WebApi.Interfaces;
 using WebApi.Models;
 
@@ -34,9 +35,8 @@ namespace WebApi.ApiControllers
         {
             repository.Add(item);
             var response = Request.CreateResponse(HttpStatusCode.Created, item);
-
-            //RouteTable.Routes.MapPageRoute()
-            string uri = Url.Link("DefaultApi", new { id = item.Id });
+           
+            string uri = Url.Link(ConfigurationProvider.GetRouteName(), new { id = item.Id });
             response.Headers.Location = new Uri(uri);
             return response;
         }

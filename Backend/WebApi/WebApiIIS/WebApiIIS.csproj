@@ -150,7 +150,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HelpController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DocGenerator\SampleGeneration\HelpPageSampleGenerator.cs" />
     <Compile Include="DocGenerator\SampleGeneration\HelpPageSampleKey.cs" />
     <Compile Include="DocGenerator\SampleGeneration\ImageSample.cs" />
@@ -276,7 +275,12 @@
     <Content Include="Views\Help\DisplayTemplates\Samples.cshtml" />
     <Content Include="Views\Help\DisplayTemplates\TextSample.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\WebApi\WebApi.csproj">
+      <Project>{a06b082d-12e9-4479-9e05-ff2145272c4e}</Project>
+      <Name>WebApi</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
