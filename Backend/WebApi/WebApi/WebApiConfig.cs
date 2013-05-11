@@ -1,5 +1,10 @@
 ﻿using System.Web.Http;
+using Microsoft.Practices.Unity;
+using WebApi.ApiControllers;
 using WebApi.Configuration;
+using WebApi.Infrastructure;
+using WebApi.Interfaces;
+using WebApi.Repositories;
 
 namespace WebApi
 {
@@ -21,6 +26,19 @@ namespace WebApi
             // To disable tracing in your application, please comment out or remove the following line of code
             // For more information, refer to: http://www.asp.net/web-api
             config.EnableSystemDiagnosticsTracing();
+
+            AdjustDependencyResolver(config);
+        }
+
+        private static void AdjustDependencyResolver(HttpConfiguration config)
+        {
+            var unity = new UnityContainer();
+            unity.RegisterType<HoleController>();
+
+            //HierarchicalLifetimeManager it is a special lifetime manager which works like ContainerControlledLifetimeManager, 
+            //except that in the presence of child containers, each child gets it's own instance of the object, instead of sharing one in the common parent.
+            unity.RegisterType<IHoleRepository, HoleRepository>(new HierarchicalLifetimeManager());
+            config.DependencyResolver = new IoCContainer(unity);
         }
     }
 }
