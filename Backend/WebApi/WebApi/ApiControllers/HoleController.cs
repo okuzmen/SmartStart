@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Routing;
 using WebApi.Interfaces;
 using WebApi.Models;
-using WebApi.Repositories;
 
 namespace WebApi.ApiControllers
 {
     public class HoleController : ApiController
     {
-        private static readonly IHoleRepository repository = new HoleRepository();
+        private readonly IHoleRepository repository;
+
+        public HoleController(IHoleRepository repository)
+        {
+            this.repository = repository;
+        }
 
         [HttpGet]
         public IEnumerable<Hole> Get()
