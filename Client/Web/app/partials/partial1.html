@@ -1,1 +1,5 @@
-<p>This is the partial for view 1.</p>
+<p ng-show="!holes">Fetching...</p>
+<li ng-show="holes" ng-repeat="result in holes">
+    <span>{{result.Id}}</span>
+    <span>{{result.Description}}</span>
+</li>

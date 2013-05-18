@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using WebApi.Interfaces;
 using WebApi.Models;
 
@@ -7,24 +7,18 @@ namespace WebApi.Repositories
 {
     public class HoleRepository : IHoleRepository
     {
-        private readonly List<Hole> products = new List<Hole>();
+        private readonly ContextProvider contextProvider = new ContextProvider();
         private int nextId = 1;
 
-        public HoleRepository()
-        {
-            Add(new Hole { Description = "Hole #1", Status = HoleStatus.New });
-            Add(new Hole { Description = "Hole #2", Status = HoleStatus.New});
-            Add(new Hole { Description = "Hole #3", Status = HoleStatus.Fixed});
-        }
 
-        public IEnumerable<Hole> GetAll()
+        public IQueryable<Hole> GetAll()
         {
-            return products;
+            return contextProvider.Context.Holes;
         }
 
         public Hole Get(int id)
         {
-            return products.Find(p => p.Id == id);
+            return contextProvider.Context.Holes.FirstOrDefault(h => h.Id == id);
         }
 
         public Hole Add(Hole item)
@@ -34,13 +28,19 @@ namespace WebApi.Repositories
                 throw new ArgumentNullException("item");
             }
             item.Id = nextId++;
-            products.Add(item);
+            contextProvider.Context.Holes.Add(item);
+            contextProvider.Context.SaveChanges();
             return item;
         }
 
         public void Remove(int id)
         {
-            products.RemoveAll(p => p.Id == id);
+            var toRemove = contextProvider.Context.Holes.Where(h => h.Id == id);
+            foreach (var hole in toRemove)
+            {
+                contextProvider.Context.Holes.Remove(hole);
+            }
+            contextProvider.Context.SaveChanges();
         }
 
         public bool Update(Hole item)
@@ -49,14 +49,21 @@ namespace WebApi.Repositories
             {
                 throw new ArgumentNullException("item");
             }
-            int index = products.FindIndex(p => p.Id == item.Id);
-            if (index == -1)
+            var toUpdate = contextProvider.Context.Holes.SingleOrDefault(h => h.Id == item.Id);
+            if (toUpdate == null)
             {
                 return false;
             }
-            products.RemoveAt(index);
-            products.Add(item);
+            var entry = contextProvider.Context.Entry(toUpdate);
+            entry.OriginalValues.SetValues(toUpdate);
+            entry.CurrentValues.SetValues(item);
+            contextProvider.Context.SaveChanges();
             return true;
-        } 
+        }
+
+        public string Metadata()
+        {
+            return contextProvider.Metadata();
+        }
     }
 }

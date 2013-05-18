@@ -1,7 +1,10 @@
-﻿namespace WebApi.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApi.Models
 {
     public class Hole
     {
+        [Key]
         public int Id { get; set; }
         public string Description { get; set; }
         public HoleStatus Status { get; set; }
