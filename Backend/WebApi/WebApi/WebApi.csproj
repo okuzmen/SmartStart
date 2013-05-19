@@ -98,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\HoleController.cs" />
-    <Compile Include="App_Start\BreezeWebApiConfig.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="Configuration\AppSettingsKeys.cs" />
     <Compile Include="Models\ContextProvider.cs" />
@@ -111,10 +110,9 @@
     <Compile Include="Models\HoleStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\HoleRepository.cs" />
-    <Compile Include="WebApiConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ApiControllers\Breeze\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

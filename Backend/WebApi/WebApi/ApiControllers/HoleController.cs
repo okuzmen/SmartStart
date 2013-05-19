@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,7 +7,6 @@ using Breeze.WebApi;
 using WebApi.Configuration;
 using WebApi.Interfaces;
 using WebApi.Models;
-using WebApi.Repositories;
 
 namespace WebApi.ApiControllers
 {
@@ -34,43 +32,43 @@ namespace WebApi.ApiControllers
             return repository.GetAll();
         }
 
-        //[HttpGet]
-        //public Hole Get(int id)
-        //{
-        //    return repository.Get(id);
-        //}
+        [HttpGet]
+        public Hole Get(int id)
+        {
+            return repository.Get(id);
+        }
 
-        //[HttpPost]
-        //public HttpResponseMessage Post(Hole item)
-        //{
-        //    repository.Add(item);
-        //    var response = Request.CreateResponse(HttpStatusCode.Created, item);
-           
-        //    string uri = Url.Link(ConfigurationProvider.GetRouteName(), new { id = item.Id });
-        //    response.Headers.Location = new Uri(uri);
-        //    return response;
-        //}
+        [HttpPost]
+        public HttpResponseMessage Post(Hole item)
+        {
+            repository.Add(item);
+            var response = Request.CreateResponse(HttpStatusCode.Created, item);
 
-        //[HttpPut]
-        //public void Put(int id, Hole item)
-        //{
-        //    item.Id = id;
-        //    if (!repository.Update(item))
-        //    {
-        //        throw new HttpResponseException(HttpStatusCode.NotFound);
-        //    }
-        //}
+            string uri = Url.Link(ConfigurationProvider.GetRouteName(), new { id = item.Id });
+            response.Headers.Location = new Uri(uri);
+            return response;
+        }
 
-        //[HttpDelete]
-        //public void Delete(int id)
-        //{
-        //    var item = repository.Get(id);
-        //    if (item == null)
-        //    {
-        //        throw new HttpResponseException(HttpStatusCode.NotFound);
-        //    }
+        [HttpPut]
+        public void Put(int id, Hole item)
+        {
+            item.Id = id;
+            if (!repository.Update(item))
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+        }
 
-        //    repository.Remove(id);
-        //}
+        [HttpDelete]
+        public void Delete(int id)
+        {
+            var item = repository.Get(id);
+            if (item == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            repository.Remove(id);
+        }
     }
 }
