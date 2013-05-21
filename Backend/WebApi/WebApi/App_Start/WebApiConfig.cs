@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using Microsoft.Practices.Unity;
 using WebApi.ApiControllers;
+using WebApi.Configuration;
 using WebApi.Infrastructure;
 using WebApi.Interfaces;
 using WebApi.Repositories;
@@ -65,7 +66,7 @@ namespace WebApi.App_Start
             #endregion
 
             config.Routes.MapHttpRoute(
-                name: "BreezeApi",
+                name: ConfigurationProvider.GetRouteName(),
                 routeTemplate: "breeze/{controller}/{action}");
         }
         #endregion

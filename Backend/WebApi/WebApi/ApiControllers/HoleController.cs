@@ -27,19 +27,19 @@ namespace WebApi.ApiControllers
         }
 
         [HttpGet]
-        public IQueryable<Hole> Holes()
+        public IQueryable<Hole> GetHoles()
         {
             return repository.GetAll();
         }
 
         [HttpGet]
-        public Hole Get(int id)
+        public Hole GetHole(int id)
         {
             return repository.Get(id);
         }
 
         [HttpPost]
-        public HttpResponseMessage Post(Hole item)
+        public HttpResponseMessage AddHole(Hole item)
         {
             repository.Add(item);
             var response = Request.CreateResponse(HttpStatusCode.Created, item);
@@ -50,7 +50,7 @@ namespace WebApi.ApiControllers
         }
 
         [HttpPut]
-        public void Put(int id, Hole item)
+        public void UpdateHole(int id, Hole item)
         {
             item.Id = id;
             if (!repository.Update(item))
@@ -60,7 +60,7 @@ namespace WebApi.ApiControllers
         }
 
         [HttpDelete]
-        public void Delete(int id)
+        public void DeleteHole(int id)
         {
             var item = repository.Get(id);
             if (item == null)
