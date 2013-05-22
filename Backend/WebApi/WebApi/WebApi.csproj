@@ -100,6 +100,7 @@
     <Compile Include="ApiControllers\HoleController.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="Configuration\AppSettingsKeys.cs" />
+    <Compile Include="Handlers\CorsHandler.cs" />
     <Compile Include="Models\ContextProvider.cs" />
     <Compile Include="Infrastructure\IoCContainer.cs" />
     <Compile Include="Infrastructure\ScopeContainer.cs" />
