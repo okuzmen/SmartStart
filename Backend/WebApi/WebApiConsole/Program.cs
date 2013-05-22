@@ -19,7 +19,7 @@ namespace WebApiConsole
             {
                 var config = new HttpSelfHostConfiguration(ConfigurationManager.AppSettings[HostAddressConfigKey]);
 
-                WebApi.WebApiConfig.Register(config);
+                WebApi.App_Start.WebApiConfig.Configure(config);
 
                 using (HttpSelfHostServer server = new HttpSelfHostServer(config))
                 {
