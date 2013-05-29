@@ -1,6 +1,8 @@
 ﻿using System.Web.Http;
 using Microsoft.Practices.Unity;
 using WebApi.ApiControllers;
+using WebApi.Configuration;
+using WebApi.Handlers;
 using WebApi.Infrastructure;
 using WebApi.Interfaces;
 using WebApi.Repositories;
@@ -25,6 +27,7 @@ namespace WebApi.App_Start
             ConfigureSupport(config);
             ConfigureRouting(config);
             ConfigureDependencyResolver(config);
+            ConfigureHandlers(config);
         }
 
         #region Private Methods
@@ -65,8 +68,13 @@ namespace WebApi.App_Start
             #endregion
 
             config.Routes.MapHttpRoute(
-                name: "BreezeApi",
+                name: ConfigurationProvider.GetRouteName(),
                 routeTemplate: "breeze/{controller}/{action}");
+        }
+
+        private static void ConfigureHandlers(HttpConfiguration config)
+        {
+            config.MessageHandlers.Add(new CorsHandler());
         }
         #endregion
     }

@@ -4,3 +4,5 @@ obj
 packages
 
 /Client/Web/.idea
+*.mdf
+*.ldf
