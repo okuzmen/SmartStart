@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="btnSnapshotText">Snapshot</string>
     <string name="btnSend">Send Snapshot</string>
+    <string name="photoIntent">Snapshot Preview</string>
 
 </resources>
