@@ -1,80 +1,120 @@
 <!doctype html>
 <html lang="en" ng-app="myApp">
-<head>
-  <meta charset="utf-8">
-  <title>My AngularJS App</title>
-  <!--css style copied from http://freebiesbooth.com/blanka-website-template-->
-  <link rel="stylesheet" href="css/main.css"/>
-</head>
-<body>
-<div id="header">
-    <div class="inner cf">
-        <form method="post" action="#" class="search">
-            <fieldset>
-                <legend>Search</legend>
-                <input type="text" name="search" placeholder="Search" value="" />
-                <input type="image" name="submit" src="img/button.png" alt="Search" />
-            </fieldset>
-        </form>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+        <title>My AngularJS App</title>
+        <!--css style copied from http://freebiesbooth.com/blanka-website-template-->
+        <link rel="stylesheet" href="css/main.css"/>
+        <style type="text/css">
+            #map-canvas { height: 400px; }
+        </style>
 
-        <div id="navigation">
-            <ul>
-                <li class="current-menu-item"><a href="index.html">home</a></li>
-                <li>
-                    <a href="#">dropdown</a>
+        <script type="text/javascript">
+            function initialize() {
+                var mapOptions = {
+                    zoom: 8,
+                    center: new google.maps.LatLng(-34.397, 150.644),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(document.getElementById('map-canvas'),
+                        mapOptions);
+            }
+
+            function loadScript() {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TTZOSVLXYr_SNfP0RMFU&sensor=false&' +
+                        'callback=initialize';
+                document.body.appendChild(script);
+            }
+
+            window.onload = loadScript;
+        </script>
+
+        <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+        -->
+        <script src="lib/jquery/jquery-1.8.3.js"></script>
+        <script src="lib/qjs/q.js"></script>
+        <script src="lib/breeze/breeze.debug.js"></script>
+        <script src="lib/angular/angular.js"></script>
+
+        <script src="js/app.js"></script>
+        <script src="js/dataservice.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/filters.js"></script>
+        <script src="js/directives.js"></script>
+
+    </head>
+
+    <body>
+        <div id="header">
+            <div class="inner cf">
+                <form method="post" action="#" class="search">
+                    <fieldset>
+                        <legend>Search</legend>
+                        <input type="text" name="search" placeholder="Search" value=""/>
+                        <input type="image" name="submit" src="img/button.png" alt="Search"/>
+                    </fieldset>
+                </form>
+
+                <div id="navigation">
                     <ul>
-                        <li><a href="#">&raquo; menu option one</a></li>
-                        <li><a href="#">&raquo; menu option two</a></li>
-                        <li><a href="#">&raquo; menu option three</a></li>
-                        <li><a href="#">&raquo; menu option four</a></li>
-                        <li><a href="#">&raquo; menu option five</a></li>
+                        <li class="current-menu-item"><a href="index.html">home</a></li>
+                        <li>
+                            <a href="#">dropdown</a>
+                            <ul>
+                                <li><a href="#">&raquo; menu option one</a></li>
+                                <li><a href="#">&raquo; menu option two</a></li>
+                                <li><a href="#">&raquo; menu option three</a></li>
+                                <li><a href="#">&raquo; menu option four</a></li>
+                                <li><a href="#">&raquo; menu option five</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="portfolio.html">portfolio</a></li>
+                        <li><a href="blog.html">blog</a></li>
                     </ul>
-                </li>
-                <li><a href="portfolio.html">portfolio</a></li>
-                <li><a href="blog.html">blog</a></li>
-            </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<hr />
+        <hr/>
 
-<div id="content" class="home">
-    <div class="inner">
-        <div class="section about">
-            <h3>Hello and welcome to our website!</h3>
-            <p>Proin quis tortor orci. Etiam at risus et justo <a href="#">dignissim congue</a>. Donec congue lacinia
-                dui, a porttitor lectus condimentum laoreet. <a href="#">Nunc eu ullamcorper orci</a>. Quisque eget odio
-                ac lectus vestibulum faucibus eget in metus. <a href="#">In pellentesque</a> faucibus vestibulum. Nunc
-                eu ullamcorper orci. Quisque egetNunc eu ullamcorper orci.</p>
+        <div id="content" class="home">
+            <div class="inner">
+                <div class="section about">
+                    <h3>Hello and welcome to our website!</h3>
+
+                    <p>Proin quis tortor orci. Etiam at risus et justo <a href="#">dignissim congue</a>. Donec congue lacinia
+                        dui, a porttitor lectus condimentum laoreet. <a href="#">Nunc eu ullamcorper orci</a>. Quisque eget odio
+                        ac lectus vestibulum faucibus eget in metus. <a href="#">In pellentesque</a> faucibus vestibulum. Nunc
+                        eu ullamcorper orci. Quisque egetNunc eu ullamcorper orci.</p>
+                </div>
+                <h2><span>Hole list</span></h2>
+                <div class="section more">
+                    <div class="text">
+                        <div ng-view></div>
+                    </div>
+                    <div>
+                        <div id="map-canvas"/>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div ng-view></div>
-    </div>
-</div>
-<div id="footer">
-    <div class="inner">
-        <p>
-            <span>&copy; 2013 by <a href="#">SmartStart</a></span>
-            <span>All rights reserved.</span>
-            <span>Designed by <a href="#">Smart Start inc.</a> team.</span>
-        </p>
-    </div>
-</div>
 
+        <hr/>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
-  -->
-  <script src="lib/jquery/jquery-1.8.3.js"></script>
-  <script src="lib/qjs/q.js"></script>
-  <script src="lib/breeze/breeze.debug.js"></script>
-  <script src="lib/angular/angular.js"></script>
-
-  <script src="js/app.js"></script>
-  <script src="js/dataservice.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
-</body>
+        <div id="footer">
+            <div class="inner">
+                <p>
+                    <span>&copy; 2013 by <a href="#">SmartStart</a></span>
+                    <span>All rights reserved.</span>
+                    <span>Designed by <a href="#">Smart Start inc.</a> team.</span>
+                </p>
+            </div>
+        </div>
+    </body>
 </html>

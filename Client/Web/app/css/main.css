@@ -39,7 +39,7 @@ body {
 			#navigation ul ul,
 			#navigation > ul > li:hover > a { background: #62a6c9; }
 
-		#navigation > ul > li.current-menu-item { background: url("../images/navigation/current-item.png"); }
+		#navigation > ul > li.current-menu-item { background: url("../img/current-item.png"); }
 
 /* #content
 ==========================================================*/
