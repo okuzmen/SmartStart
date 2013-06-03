@@ -28,4 +28,14 @@
         android:layout_marginBottom="14dp"
         android:text="@string/btnSend" />
 
+		<ImageView
+		    android:id="@+id/previewImage"
+		    android:layout_width="200dp"
+		    android:layout_height="280dp"
+		    android:layout_above="@+id/buttonSend"
+		    android:layout_alignLeft="@+id/buttonSnapshot"
+		    android:layout_alignRight="@+id/buttonSnapshot"
+		    android:layout_below="@+id/buttonSnapshot"
+		    android:contentDescription="@string/photoIntent" />
+
 </RelativeLayout>
