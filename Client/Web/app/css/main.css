@@ -2,7 +2,7 @@
 @import url("form.css");
 
 body {
-	background: #f4f4f4;
+	background: #444;
 	font: 13px/22px Helvetica, Arial, sans-serif;
 }
 
@@ -267,7 +267,7 @@ body,
 #content .tags-list .current-menu-item a,
 #content .text a:hover { color: #61a5c9; }
 
-#footer a {color: #62a6c9;}
+#footer a,
 #content .badge,
 #navigation li li a:hover,
 #navigation > ul > li:hover > a { color: #fff; }
