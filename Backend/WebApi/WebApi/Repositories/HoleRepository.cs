@@ -8,7 +8,6 @@ namespace WebApi.Repositories
     public class HoleRepository : IHoleRepository
     {
         private readonly ContextProvider contextProvider = new ContextProvider();
-        private int nextId = 1;
 
 
         public IQueryable<Hole> GetAll()
@@ -27,7 +26,6 @@ namespace WebApi.Repositories
             {
                 throw new ArgumentNullException("item");
             }
-            item.Id = nextId++;
             contextProvider.Context.Holes.Add(item);
             contextProvider.Context.SaveChanges();
             return item;
