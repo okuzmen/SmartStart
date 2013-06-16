@@ -23,10 +23,16 @@ namespace ImageTools
         /// <param name="image">Bitmap image.</param>
         /// <param name="maxWidth">Resize width.</param>
         /// <param name="maxHeight">Resize height.</param>
-        /// <param name="preserveAspectRation">Defines if a proportional relationship between width and height should be preserved.</param>
+        /// <param name="preserveAspectRation">Defines if a proportional relationship between width and height should be preserved.
+        /// If set to true, the maxHeight parameter is ignored and height will be adjusted automatically.</param>
         /// <returns>A resized bitmap image.</returns>
         public static Bitmap Resize(Bitmap image, int maxWidth, int maxHeight, bool preserveAspectRation)
         {
+            if (maxWidth <= 0)
+            {
+                throw new ArgumentException("Width should be greater than 0");
+            }
+
             // Get the image's original width and height
             int originalWidth = image.Width;
             int originalHeight = image.Height;
@@ -36,13 +42,18 @@ namespace ImageTools
             if (preserveAspectRation)
             {
                 // To preserve the aspect ratio
-                float ratioX = (float)maxWidth / (float)originalWidth;
-                float ratioY = (float)maxHeight / (float)originalHeight;
-                float ratio = Math.Min(ratioX, ratioY);
+                float ratio = (float)maxWidth / (float)originalWidth;
 
                 // New width and height based on aspect ratio
                 newWidth = (int)(originalWidth * ratio);
                 newHeight = (int)(originalHeight * ratio);
+            }
+            else
+            {
+                if (maxHeight <= 0)
+                {
+                    throw new ArgumentException("Height should be greater than 0"); 
+                }
             }
 
             // Convert other formats (including CMYK) to RGB.
@@ -67,7 +78,8 @@ namespace ImageTools
         /// <param name="resultPath">The path for the resized image.</param> 
         /// <param name="width">Desired width.</param>
         /// <param name="height">Desired height.</param>
-        /// <param name="preserveAspectRation">Defines if a proportional relationship between width and height should be preserved.</param>
+        /// <param name="preserveAspectRation">Defines if a proportional relationship between width and height should be preserved.
+        /// If set to true, the maxHeight parameter is ignored and height will be adjusted automatically.</param>
         /// <param name="resultFileType">The image file type that should be use while saving.</param>
         public static void ResizeImage(string originalPath, string resultPath, int width, int height, ImageFormat resultFileType, bool preserveAspectRation)
         {
