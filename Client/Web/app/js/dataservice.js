@@ -9,7 +9,7 @@ breeze.config.initializeAdapterInstance( "modelLibrary", "backingStore", true);
 breeze.NamingConvention.camelCase.setAsDefault();
 
 myApp.factory("DataService", function(){
-    var manager = new breeze.EntityManager("http://localhost:9080/breeze/Hole");
+    var manager = new breeze.EntityManager("http://localhost:25792/breeze/Hole");
 
     var dataService = {
         getAllHoles: getAllHoles
