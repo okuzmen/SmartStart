@@ -13,7 +13,8 @@ myApp.factory("DataService", function(){
 
     var dataService = {
         getAllHoles: getAllHoles,
-        addHole: addHole
+        createHole: createHole,
+        saveChanges: saveChanges
     }
 
     return dataService;
@@ -23,8 +24,11 @@ myApp.factory("DataService", function(){
         return manager.executeQuery(query);
     }
 
-    function addHole(hole){
-        manager.createEntity('Hole', hole);
+    function createHole(){
+        return manager.createEntity('Hole');
+    }
+
+    function saveChanges(){
         manager.saveChanges();
     }
 });

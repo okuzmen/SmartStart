@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Data.Spatial;
 
 namespace WebApi.Models
 {
@@ -9,7 +8,7 @@ namespace WebApi.Models
         public int Id { get; set; }
         public string Description { get; set; }
         public HoleStatus Status { get; set; }
-        public DbGeography Location { get; set; }
+        public Location Location { get; set; }
 
         /// <summary>
         /// Gets or sets path to the image.

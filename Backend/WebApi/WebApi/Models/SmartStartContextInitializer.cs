@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Data.Spatial;
 
 namespace WebApi.Models
 {
@@ -13,7 +12,7 @@ namespace WebApi.Models
                     {
                         Description = "Hole #" + i,
                         Status = HoleStatus.New,
-                        Location = DbGeography.FromText(string.Format("POINT({0} 35.046193)", 48.464764+i)),
+                        Location = new Location { Latitude = 48.464764 + i, Longitude = 35.046193 },
                         ImagePath = "img/hole.png"
                     };
                 context.Holes.Add(newHole);

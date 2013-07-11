@@ -36,20 +36,22 @@ angular.module('myApp.controllers', []).
             event.cancelBubble = true;
             var lat = event.latLng.lat();
             var lng = event.latLng.lng();
-            $scope.hole.location = "{lat:" +lat+ "; lng:" + lng+"}";
+            $scope.hole.location = {
+                latitude:lat,
+                longitude:lng
+            };
             $scope.$apply();
         });
 
         $scope.createHole = function () {
             var hole = $scope.hole; //new hole
-            DataService.addHole(
-                {
-                    "location": hole.location,
-                    "description": hole.description,
-                    "status": 0,   //New
-                    "imagePath": "to image" //Get the path to image
-                }
-            );
+            var newHole = DataService.createHole();
+            newHole.location.latitude = hole.location.latitude;
+            newHole.location.longitude = hole.location.longitude;
+            newHole.description = hole.description;
+            newHole.status = 0; //New
+            newHole.imagePath = "path to image";
+            DataService.saveChanges();
         };
 
         $scope.setFile = function (element) {
@@ -79,7 +81,7 @@ function markHollesOnMap(holes) {
 
     for (var index in holes) {
         var hole = holes[index];
-        var latLng = dbGeographyPointToLatLng(hole.location.Geography.WellKnownText);
+        var latLng = new google.maps.LatLng(hole.location.latitude, hole.location.longitude);
         var marker = new google.maps.Marker({
             position: latLng,
             title: hole.description
@@ -87,15 +89,6 @@ function markHollesOnMap(holes) {
         marker.setMap(map);
         bindInfoWindow(marker, map, infoWindow, buildHtmlContent(hole.imagePath, hole.description, contentTemplate));
     }
-}
-function dbGeographyPointToLatLng(rawString) {
-
-    var startIndex = rawString.indexOf("(") + 1;
-    var endIndex = rawString.indexOf(")") + 1;
-    var coords = rawString.substring(startIndex, endIndex).split(" ");
-    var lat = parseFloat(coords[0]);
-    var lng = parseFloat(coords[1]);
-    return new google.maps.LatLng(lat, lng);
 }
 
 function buildHtmlContent(imagePath, description, template) {
