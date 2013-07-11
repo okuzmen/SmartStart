@@ -9,7 +9,7 @@
 <h2><span>Hole list</span></h2>
 <div class="section more">
     <div class="text">
-        <p ng-show="!holes">Fetching...</p>
+        <p ng-show="!holes">{{statusMessage}}</p>
         <li ng-show="holes" ng-repeat="result in holes">
             <span>ID: {{result.id}} </span>
             <span>Description: {{result.description}}</span>

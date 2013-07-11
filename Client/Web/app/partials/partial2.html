@@ -5,5 +5,14 @@
             Showing of 'interpolate' filter:
             {{ 'Current version is v%VERSION%.' | interpolate }}
         </p>
+        <form ng-submit="createHole()">
+            <textarea ng-model="hole.description"  placeholder="Please enter description" />
+            <input ng-model="hole.location" type="text" placeholder="Location"/>
+            <input type="file" fileread="hole.image" />
+            <button>add hole</button>
+        </form>
+        <div>
+            <div id="map-canvas"></div>
+        </div>
     </div>
 </div>

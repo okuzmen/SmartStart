@@ -14,6 +14,6 @@ namespace WebApi.Models
         /// <summary>
         /// Gets or sets path to the image.
         /// </summary>
-        public string Image { get; set; }
+        public string ImagePath { get; set; }
     }
 }

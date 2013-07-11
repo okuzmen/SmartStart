@@ -14,7 +14,7 @@ namespace WebApi.Models
                         Description = "Hole #" + i,
                         Status = HoleStatus.New,
                         Location = DbGeography.FromText(string.Format("POINT({0} 35.046193)", 48.464764+i)),
-                        Image = "img/hole.png"
+                        ImagePath = "img/hole.png"
                     };
                 context.Holes.Add(newHole);
             }

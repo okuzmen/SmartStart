@@ -12,7 +12,8 @@ myApp.factory("DataService", function(){
     var manager = new breeze.EntityManager("http://localhost:25792/breeze/Hole");
 
     var dataService = {
-        getAllHoles: getAllHoles
+        getAllHoles: getAllHoles,
+        addHole: addHole
     }
 
     return dataService;
@@ -20,5 +21,10 @@ myApp.factory("DataService", function(){
     function getAllHoles() {
         var query = new breeze.EntityQuery().from("GetHoles").orderBy("id");
         return manager.executeQuery(query);
+    }
+
+    function addHole(hole){
+        manager.createEntity('Hole', hole);
+        manager.saveChanges();
     }
 });

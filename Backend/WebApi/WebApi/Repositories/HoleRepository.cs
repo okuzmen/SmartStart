@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
+using Breeze.WebApi;
+using Newtonsoft.Json.Linq;
 using WebApi.Interfaces;
 using WebApi.Models;
+using ContextProvider = WebApi.Models.ContextProvider;
 
 namespace WebApi.Repositories
 {
@@ -57,6 +60,11 @@ namespace WebApi.Repositories
             entry.CurrentValues.SetValues(item);
             contextProvider.Context.SaveChanges();
             return true;
+        }
+
+        public SaveResult SaveChanges(JObject saveBundle)
+        {
+            return contextProvider.SaveChanges(saveBundle);
         }
 
         public string Metadata()
