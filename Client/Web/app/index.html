@@ -6,10 +6,6 @@
         <title>My AngularJS App</title>
         <!--css style copied from http://freebiesbooth.com/blanka-website-template-->
         <link rel="stylesheet" href="css/main.css"/>
-        <style type="text/css">
-            #map-canvas { height: 400px; }
-        </style>
-
         <!-- In production use:
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
         -->
@@ -41,9 +37,10 @@
 
                 <div id="navigation">
                     <ul>
-                        <li class="current-menu-item"><a href="index.html">home</a></li>
-                        <li>
-                            <a href="#">dropdown</a>
+                        <li ng-class="{'current-menu-item' : $root.activeViewIndex == 0}"><a href="index.html">Hole list</a></li>
+                        <li ng-class="{'current-menu-item' : $root.activeViewIndex == 1}"><a href="#/AddNewHole">Add new</a></li>
+                        <li ng-class="{'current-menu-item' : $root.activeViewIndex == 2}">
+                            <a href="#">Stub 1</a>
                             <ul>
                                 <li><a href="#">&raquo; menu option one</a></li>
                                 <li><a href="#">&raquo; menu option two</a></li>
@@ -52,8 +49,7 @@
                                 <li><a href="#">&raquo; menu option five</a></li>
                             </ul>
                         </li>
-                        <li><a href="#/AddNewHole">add new</a></li>
-                        <li><a href="blog.html">blog</a></li>
+                        <li ng-class="{'current-menu-item' : $root.activeViewIndex == 3}"><a href="">Stub 2</a></li>
                     </ul>
                 </div>
             </div>

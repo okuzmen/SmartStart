@@ -1,18 +1,19 @@
+<div class="section about">
+    <h3>Add new Hole</h3>
+
+    <p>Please fill required fields to add a new hole. You can use map to set location: just try right mouse click!</p>
+</div>
+
 <div class="section more">
-    <div class="text">
-        <p>This is the partial for view 2.</p>
-        <p>
-            Showing of 'interpolate' filter:
-            {{ 'Current version is v%VERSION%.' | interpolate }}
-        </p>
         <form ng-submit="createHole()">
-            <textarea ng-model="hole.description"  placeholder="Please enter description" />
-            <input ng-model="hole.location" type="text" placeholder="Location"/>
+            <textarea style="width: 99%; height: 100px" ng-model="hole.description"  placeholder="Please enter description" />
+            </br>
+            <div>
+                <div style="height: 400px" id="map-canvas"></div>
+            </div>
             <input type="file" fileread="hole.image" />
+            </br>
             <button>add hole</button>
         </form>
-        <div>
-            <div id="map-canvas"></div>
-        </div>
-    </div>
+
 </div>
