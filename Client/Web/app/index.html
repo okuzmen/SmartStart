@@ -1,26 +1,12 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
         <title>My AngularJS App</title>
         <!--css style copied from http://freebiesbooth.com/blanka-website-template-->
         <link rel="stylesheet" href="css/main.css"/>
-        <!-- In production use:
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
-        -->
-        <script src="lib/jquery/jquery-1.8.3.js"></script>
-        <script src="lib/qjs/q.js"></script>
-        <script src="lib/breeze/breeze.debug.js"></script>
-        <script src="lib/angular/angular.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TTZOSVLXYr_SNfP0RMFU&sensor=false"></script>
-
-        <script src="js/app.js"></script>
-        <script src="js/dataservice.js"></script>
-        <script src="js/services.js"></script>
-        <script src="js/controllers.js"></script>
-        <script src="js/filters.js"></script>
-        <script src="js/directives.js"></script>
+        <script data-main="main" src="lib/requirejs/require.js"></script>
 
     </head>
 
@@ -37,7 +23,7 @@
 
                 <div id="navigation">
                     <ul>
-                        <li ng-class="{'current-menu-item' : $root.activeViewIndex == 0}"><a href="index.html">Hole list</a></li>
+                        <li ng-class="{'current-menu-item' : $root.activeViewIndex == 0}"><a href="#/Home">Hole list</a></li>
                         <li ng-class="{'current-menu-item' : $root.activeViewIndex == 1}"><a href="#/AddNewHole">Add new</a></li>
                         <li ng-class="{'current-menu-item' : $root.activeViewIndex == 2}">
                             <a href="#">Stub 1</a>
