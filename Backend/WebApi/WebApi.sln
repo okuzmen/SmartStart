@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiIIS", "WebApiIIS\WebA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{A06B082D-12E9-4479-9E05-FF2145272C4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiConsole", "WebApiConsole\WebApiConsole.csproj", "{E64FEFBC-E35A-4B86-9DE8-975B2E0735DE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A246BE4E-9CE2-4753-948D-AEA31631DB57}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -32,10 +30,6 @@ Global
 		{A06B082D-12E9-4479-9E05-FF2145272C4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A06B082D-12E9-4479-9E05-FF2145272C4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A06B082D-12E9-4479-9E05-FF2145272C4E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E64FEFBC-E35A-4B86-9DE8-975B2E0735DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E64FEFBC-E35A-4B86-9DE8-975B2E0735DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E64FEFBC-E35A-4B86-9DE8-975B2E0735DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E64FEFBC-E35A-4B86-9DE8-975B2E0735DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D5AA9BC-ECB8-4FF3-9B6B-FAFA3ED39823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D5AA9BC-ECB8-4FF3-9B6B-FAFA3ED39823}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D5AA9BC-ECB8-4FF3-9B6B-FAFA3ED39823}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -48,10 +48,12 @@ namespace WebApi.App_Start
         {
             var unity = new UnityContainer();
             unity.RegisterType<HoleController>();
+            unity.RegisterType<ImageController>();
 
             //HierarchicalLifetimeManager it is a special lifetime manager which works like ContainerControlledLifetimeManager, 
             //except that in the presence of child containers, each child gets it's own instance of the object, instead of sharing one in the common parent.
             unity.RegisterType<IHoleRepository, HoleRepository>(new HierarchicalLifetimeManager());
+            unity.RegisterType<IImageRepository, ImageRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new IoCContainer(unity);
         }
 

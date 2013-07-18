@@ -26,7 +26,7 @@ namespace ImageTools
         /// <param name="preserveAspectRation">Defines if a proportional relationship between width and height should be preserved.
         /// If set to true, the maxHeight parameter is ignored and height will be adjusted automatically.</param>
         /// <returns>A resized bitmap image.</returns>
-        public static Bitmap Resize(Bitmap image, int maxWidth, int maxHeight, bool preserveAspectRation)
+        public static Image Resize(Image image, int maxWidth, int maxHeight, bool preserveAspectRation)
         {
             if (maxWidth <= 0)
             {
@@ -84,10 +84,10 @@ namespace ImageTools
         public static void ResizeImage(string originalPath, string resultPath, int width, int height, ImageFormat resultFileType, bool preserveAspectRation)
         {
             // Load the original image
-            Bitmap original = new Bitmap(originalPath);
+            Image original = new Bitmap(originalPath);
 
             // Resize it with provided width and height
-            Bitmap resizedImage = Resize(original, width, height, preserveAspectRation);
+            Image resizedImage = Resize(original, width, height, preserveAspectRation);
 
             // Get an ImageCodecInfo object that represents the provided codec.
             ImageCodecInfo imageCodecInfo = GetEncoderInfo(resultFileType);
