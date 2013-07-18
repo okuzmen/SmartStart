@@ -10,8 +10,12 @@ define(["js/app", "breeze"], function(myApp, breeze){
     breeze.config.initializeAdapterInstance( "modelLibrary", "backingStore", true);
     breeze.NamingConvention.camelCase.setAsDefault();
 
+
     myApp.factory("dataService", function(){
-        var manager = new breeze.EntityManager("http://localhost:25792/breeze/Hole");
+        var model = "http://localhost:25792/breeze/Hole";
+        var manager = new breeze.EntityManager(model);
+        var metadataStore = manager.metadataStore;
+        metadataStore.fetchMetadata(model);
 
         var dataService = {
             getAllHoles: getAllHoles,
