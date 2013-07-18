@@ -33,7 +33,7 @@ require.config({
 require({
     waitSeconds : 120, //make sure it is enough to load all gmaps scripts
     paths : {
-        async : '../lib/requirejs/async' //alias to plugin
+        async : 'lib/requirejs/async' //alias to plugin
     }
 });
 
