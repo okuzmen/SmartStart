@@ -9,10 +9,11 @@
 require.config({
         paths : {
             angular : "lib/angular/angular",
-            jquery : "lib/jquery/jquery-1.8.3",
+            jquery : "lib/jquery/jquery-1.10.2.min",
             breeze : "lib/breeze/breeze.debug",
             domReady: "lib/domReady/domReady",
-            Q : "lib/qjs/q"
+            Q : "lib/qjs/q",
+            lightbox: "lib/lightbox/lightbox-2.6.min"
         },
         shim: {
             angular : {
@@ -22,6 +23,10 @@ require.config({
             breeze : {
                 deps : ["jquery", "Q"],
                 exports : "breeze"
+            },
+            lightbox : {
+                deps : ["jquery"],
+                exports: "lightbox"
             }
         },
         priority: [

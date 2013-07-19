@@ -11,8 +11,13 @@ namespace WebApi.Models
         public Location Location { get; set; }
 
         /// <summary>
-        /// Gets or sets path to the image.
+        /// Gets or sets path to the fullsize image.
         /// </summary>
         public string ImagePath { get; set; }
+
+        /// <summary>
+        /// Gets or sets path to the preview.
+        /// </summary>
+        public string PreviewPath { get; set; }
     }
 }

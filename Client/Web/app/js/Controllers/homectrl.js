@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TTZOSVLXYr_SNfP0RMFU&sensor=false!callback'], function(){
+define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TTZOSVLXYr_SNfP0RMFU&sensor=false!callback', 'lightbox'], function(){
     return ["$scope", "DataService", function($scope, DataService){
         $scope.statusMessage = "Data fetching...";
         $scope.$apply();
@@ -48,12 +48,12 @@ define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TT
                     title: hole.description
                 });
                 marker.setMap(map);
-                bindInfoWindow(marker, map, infoWindow, buildHtmlContent(hole.imagePath, hole.description, contentTemplate));
+                bindInfoWindow(marker, map, infoWindow, buildHtmlContent(hole.imagePath, hole.description, hole.previewPath, contentTemplate));
             }
         }
 
-        function buildHtmlContent(imagePath, description, template) {
-            return template.replace("{imgPath}", imagePath).replace("{descrText}", description);
+        function buildHtmlContent(imagePath, description, previewPath, template) {
+            return template.replace(/{fullsizeImage}/g, imagePath).replace("{previewImage}", previewPath).replace("{descrText}", description);
         }
 
         function loadContentTemplate(filePath) {
