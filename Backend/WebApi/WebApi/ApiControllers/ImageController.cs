@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Breeze.WebApi;
 using Newtonsoft.Json.Linq;
 using WebApi.Interfaces;
@@ -22,10 +20,8 @@ namespace WebApi.ApiControllers
         public JObject AddImage(JObject imageObject)
         {
             var image = imageObject.ToObject<ImageSource>();
-            var result = repository.Add(image.Get64BaseString());
-
+            var result = repository.Add(image);
             return JObject.FromObject(result);
-
         }
     }
 }

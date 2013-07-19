@@ -6,8 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
-define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TTZOSVLXYr_SNfP0RMFU&sensor=false!callback'], function(){
-    return ["$scope", "DataService", function($scope, DataService){
+define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TTZOSVLXYr_SNfP0RMFU&sensor=false!callback'], function () {
+    return ["$scope", "DataService", function ($scope, DataService) {
         //Init hole model.
         $scope.hole = {
             description: "",
@@ -39,13 +39,15 @@ define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TT
         $scope.createHole = function () {
             var hole = $scope.hole; //new hole
             var newHole = DataService.createHole();
-            $scope.result = DataService.addImage(hole.image, function(result){
-            newHole.location.latitude = hole.location.latitude;
-            newHole.location.longitude = hole.location.longitude;
-            newHole.description = hole.description;
-            newHole.status = 0; //New
-            newHole.imagePath = result.FullSi
-            DataService.saveChanges();
+            $scope.result = DataService.addImage(hole.image, function (result) {
+                newHole.location.latitude = hole.location.latitude;
+                newHole.location.longitude = hole.location.longitude;
+                newHole.description = hole.description;
+                newHole.status = 0; //New
+                newHole.imagePath = result.fullSizeImage;
+                newHole.previewPath = result.previewSizeImage;
+                console.log(newHole);
+                DataService.saveChanges();
             });
         };
 

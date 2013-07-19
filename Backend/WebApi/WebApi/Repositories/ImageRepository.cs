@@ -1,4 +1,5 @@
-﻿using ImageTools;
+﻿using System.Drawing;
+using ImageTools;
 using System;
 using System.Configuration;
 using System.Drawing.Imaging;
@@ -6,22 +7,20 @@ using System.IO;
 using System.Web;
 using WebApi.Interfaces;
 using WebApi.Models;
-using Image = System.Drawing.Image;
-
 
 namespace WebApi.Repositories
 {
     public class ImageRepository : IImageRepository
     {
-        private readonly string DataFolderConfigKey = "DataFolder";
-        private readonly string FullsizeFolderConfigKey = "FullSizeFolder";
-        private readonly string PreviewFolderConfigKey = "PreviewSizeFolder";
+        private const string DataFolderConfigKey = "DataFolder";
+        private const string FullsizeFolderConfigKey = "FullSizeFolder";
+        private const string PreviewFolderConfigKey = "PreviewSizeFolder";
 
         //could be moved to configuration
-        private ImageFormat storeImageFormat = ImageFormat.Png;
+        private readonly ImageFormat imageFormat = ImageFormat.Png;
 
-        private string previewsFolder;
-        private string fullSizeImagesFolder;
+        private readonly string previewsFolder;
+        private readonly string fullSizeImagesFolder;
         private readonly string appDataPath;
 
         public ImageRepository()
@@ -42,11 +41,10 @@ namespace WebApi.Repositories
             }
         }
 
-        public ImagePath Add(string encodedImage)
+        public ImagePath Add(ImageSource imageSource)
         {
             var id = Guid.NewGuid();
-            var img = Base64ToImage(encodedImage);
-
+            var img = Base64ToImage(imageSource.Get64BaseString());
             return Add(id, img);
         }
 
@@ -58,8 +56,8 @@ namespace WebApi.Repositories
 
         public void Remove(Guid id)
         {
-            string fullSize = Path.Combine(fullSizeImagesFolder, string.Concat(id.ToString(), ".", storeImageFormat));
-            string preview = Path.Combine(previewsFolder, string.Concat(id.ToString(), ".", storeImageFormat));
+            string fullSize = Path.Combine(fullSizeImagesFolder, string.Concat(id.ToString(), ".", imageFormat));
+            string preview = Path.Combine(previewsFolder, string.Concat(id.ToString(), ".", imageFormat));
 
             if (File.Exists(fullSize))
             {
@@ -74,22 +72,26 @@ namespace WebApi.Repositories
 
         private ImagePath Add(Guid id, Image image)
         {
-            string fullSize = HttpContext.Current.Server.MapPath(Path.Combine(fullSizeImagesFolder, string.Concat(id.ToString(), ".", storeImageFormat)));
-            string preview = HttpContext.Current.Server.MapPath(Path.Combine(previewsFolder, string.Concat(id.ToString(), ".", storeImageFormat)));
+            var fullSizeImagePath = Path.Combine(fullSizeImagesFolder, string.Concat(id.ToString(), ".", imageFormat));
+            var previewSizeImagePath = Path.Combine(previewsFolder, string.Concat(id.ToString(), ".", imageFormat));
 
-            image.Save(fullSize);
-            ImageResizer.Resize(image, 200, 0, true).Save(preview);
+            var previewImage = ImageResizer.Resize(image, 200, 0, true);
+            image.Save(HttpContext.Current.Server.MapPath(fullSizeImagePath));
+            previewImage.Save(HttpContext.Current.Server.MapPath(previewSizeImagePath));
 
-            return new ImagePath { FullSizeImage = Path.Combine(fullSizeImagesFolder, string.Concat(id.ToString(), ".", storeImageFormat)), PreviewSizeImage = Path.Combine(previewsFolder, string.Concat(id.ToString(), ".", storeImageFormat)) };
+            return new ImagePath
+            {
+                FullSizeImage = fullSizeImagePath.Remove(0, 2), 
+                PreviewSizeImage = previewSizeImagePath.Remove(0, 2)
+            };
         }
 
         private Image Base64ToImage(string encodedImage)
         {
-            int strL = encodedImage.Length;
             byte[] imageBytes = Convert.FromBase64String(encodedImage);
-            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+            var ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
             ms.Write(imageBytes, 0, imageBytes.Length);
-            Image image = Image.FromStream(ms, true);
+            var image = Image.FromStream(ms, true);
             return image;
         }
     }

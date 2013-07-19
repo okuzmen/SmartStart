@@ -7,7 +7,7 @@
  */
 
 define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TTZOSVLXYr_SNfP0RMFU&sensor=false!callback', 'lightbox'], function(){
-    return ["$scope", "DataService", function($scope, DataService){
+    return ["$scope", "$rootScope", "DataService", function($scope, $rootScope, DataService){
         $scope.statusMessage = "Data fetching...";
         $scope.$apply();
         DataService.getAllHoles().then(function (data) {
@@ -38,7 +38,7 @@ define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TT
 
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
             var infoWindow = new google.maps.InfoWindow({ content: '' });
-            var contentTemplate = loadContentTemplate("partials/MarkerInfoTemplate.html");
+
 
             for (var index in holes) {
                 var hole = holes[index];
@@ -48,12 +48,15 @@ define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TT
                     title: hole.description
                 });
                 marker.setMap(map);
-                bindInfoWindow(marker, map, infoWindow, buildHtmlContent(hole.imagePath, hole.description, hole.previewPath, contentTemplate));
+                bindInfoWindow(marker, map, infoWindow, buildHtmlContent($rootScope.serverAddress + hole.imagePath,
+                    $rootScope.serverAddress + hole.previewPath,
+                    hole.description));
             }
         }
 
-        function buildHtmlContent(imagePath, description, previewPath, template) {
-            return template.replace(/{fullsizeImage}/g, imagePath).replace("{previewImage}", previewPath).replace("{descrText}", description);
+        function buildHtmlContent(imagePath, previewPath, description) {
+            var contentTemplate = loadContentTemplate("partials/MarkerInfoTemplate.html");
+            return contentTemplate.replace(/{fullsizeImage}/g, imagePath).replace("{previewImage}", previewPath).replace("{descrText}", description);
         }
 
         function loadContentTemplate(filePath) {

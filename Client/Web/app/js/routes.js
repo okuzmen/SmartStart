@@ -13,6 +13,7 @@ define(['angular', 'js/app'], function(angular, app) {
     var addNewHoleControllerName = "addnewholectrl";
 
     app.run(["$rootScope", function ($rootScope) {
+        $rootScope.serverAddress = "http://localhost:25792/";
         $rootScope.$on('$routeChangeSuccess', function (ev, data) {
             if (data.$$route && data.$$route.controller) {
                 var index;

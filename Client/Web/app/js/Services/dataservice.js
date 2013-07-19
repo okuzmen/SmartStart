@@ -42,7 +42,7 @@ define(["js/app", "breeze"], function(myApp, breeze){
         function addImage(image, callback){
             var Image = $resource("http://localhost\\:25792/breeze/Image/AddImage")
             var newImage = new Image();
-            newImage.ImageResource = image;
+            newImage.dataUrl = image;
             newImage.$save(function(result){
                    callback(result);
             });

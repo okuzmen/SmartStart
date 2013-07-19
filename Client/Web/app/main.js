@@ -31,7 +31,7 @@ require.config({
                 exports: "lightbox"
             },
             angularResources: {
-                deps : ["jquery"],
+                deps : ["angular"],
                 exports: "angularResources"
             }
         },

@@ -4,10 +4,10 @@ namespace WebApi.Models
 {
     public class ImagePath
     {
-        [JsonProperty]
+        [JsonProperty("fullSizeImage")]
         public string FullSizeImage { get; set; }
 
-        [JsonProperty]
+        [JsonProperty("previewSizeImage")]
         public string PreviewSizeImage { get; set; }
     }
 }
