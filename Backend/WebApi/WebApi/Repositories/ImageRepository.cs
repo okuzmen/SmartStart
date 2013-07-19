@@ -2,10 +2,7 @@
 using System;
 using System.Configuration;
 using System.Drawing.Imaging;
-using System.DirectoryServices;
 using System.IO;
-using System.Collections.Generic;
-using System.Text;
 using System.Web;
 using WebApi.Interfaces;
 using WebApi.Models;

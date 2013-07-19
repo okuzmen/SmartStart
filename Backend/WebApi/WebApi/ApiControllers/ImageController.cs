@@ -21,7 +21,7 @@ namespace WebApi.ApiControllers
         [HttpPost]
         public JObject AddImage(JObject imageObject)
         {
-            var image = imageObject.ToObject<Image>();
+            var image = imageObject.ToObject<ImageSource>();
             var result = repository.Add(image.Get64BaseString());
 
             return JObject.FromObject(result);
