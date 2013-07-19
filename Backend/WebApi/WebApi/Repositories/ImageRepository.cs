@@ -1,7 +1,6 @@
 ﻿using ImageTools;
 using System;
 using System.Configuration;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.DirectoryServices;
 using System.IO;
@@ -9,6 +8,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using WebApi.Interfaces;
+using WebApi.Models;
+using Image = System.Drawing.Image;
 
 
 namespace WebApi.Repositories
@@ -28,24 +29,23 @@ namespace WebApi.Repositories
 
         public ImageRepository()
         {
-            appDataPath = HttpContext.Current.Server.MapPath(
-                string.Concat("~/", ConfigurationManager.AppSettings[DataFolderConfigKey]));
+            appDataPath = string.Concat("~/", ConfigurationManager.AppSettings[DataFolderConfigKey]);
 
             previewsFolder = Path.Combine(appDataPath, ConfigurationManager.AppSettings[PreviewFolderConfigKey]);
             fullSizeImagesFolder = Path.Combine(appDataPath, ConfigurationManager.AppSettings[FullsizeFolderConfigKey]);
 
             if (!Directory.Exists(previewsFolder))
             {
-                Directory.CreateDirectory(previewsFolder);
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath(previewsFolder));
             }
 
             if (!Directory.Exists(fullSizeImagesFolder))
             {
-                Directory.CreateDirectory(fullSizeImagesFolder);
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath(fullSizeImagesFolder));
             }
         }
 
-        public string[] Add(string encodedImage)
+        public ImagePath Add(string encodedImage)
         {
             var id = Guid.NewGuid();
             var img = Base64ToImage(encodedImage);
@@ -75,15 +75,15 @@ namespace WebApi.Repositories
             }
         }
 
-        private string[] Add(Guid id, Image image)
+        private ImagePath Add(Guid id, Image image)
         {
-            string fullSize = Path.Combine(fullSizeImagesFolder, string.Concat(id.ToString(), ".", storeImageFormat));
-            string preview = Path.Combine(previewsFolder, string.Concat(id.ToString(), ".", storeImageFormat));
+            string fullSize = HttpContext.Current.Server.MapPath(Path.Combine(fullSizeImagesFolder, string.Concat(id.ToString(), ".", storeImageFormat)));
+            string preview = HttpContext.Current.Server.MapPath(Path.Combine(previewsFolder, string.Concat(id.ToString(), ".", storeImageFormat)));
 
             image.Save(fullSize);
             ImageResizer.Resize(image, 200, 0, true).Save(preview);
 
-            return new string[] { fullSize, preview };
+            return new ImagePath { FullSizeImage = Path.Combine(fullSizeImagesFolder, string.Concat(id.ToString(), ".", storeImageFormat)), PreviewSizeImage = Path.Combine(previewsFolder, string.Concat(id.ToString(), ".", storeImageFormat)) };
         }
 
         private Image Base64ToImage(string encodedImage)

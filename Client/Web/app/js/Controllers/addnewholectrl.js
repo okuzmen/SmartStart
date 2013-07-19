@@ -39,12 +39,14 @@ define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCWwm--593hmH9TT
         $scope.createHole = function () {
             var hole = $scope.hole; //new hole
             var newHole = DataService.createHole();
+            $scope.result = DataService.addImage(hole.image, function(result){
             newHole.location.latitude = hole.location.latitude;
             newHole.location.longitude = hole.location.longitude;
             newHole.description = hole.description;
             newHole.status = 0; //New
-            newHole.imagePath = "path to image";
+            newHole.imagePath = result.FullSi
             DataService.saveChanges();
+            });
         };
 
         $scope.setFile = function (element) {

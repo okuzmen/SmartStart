@@ -6,3 +6,4 @@ packages
 /Client/Web/.idea
 *.mdf
 *.ldf
+/Backend/WebApi/WebApiIIS/StorageFolder

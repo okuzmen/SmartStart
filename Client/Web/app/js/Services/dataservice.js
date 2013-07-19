@@ -11,7 +11,7 @@ define(["js/app", "breeze"], function(myApp, breeze){
     breeze.NamingConvention.camelCase.setAsDefault();
 
 
-    myApp.factory("dataService", function(){
+    myApp.factory("dataService", ["$resource", function($resource){
         var model = "http://localhost:25792/breeze/Hole";
         var manager = new breeze.EntityManager(model);
         var metadataStore = manager.metadataStore;
@@ -20,7 +20,8 @@ define(["js/app", "breeze"], function(myApp, breeze){
         var dataService = {
             getAllHoles: getAllHoles,
             createHole: createHole,
-            saveChanges: saveChanges
+            saveChanges: saveChanges,
+            addImage : addImage
         }
 
         return dataService;
@@ -37,7 +38,17 @@ define(["js/app", "breeze"], function(myApp, breeze){
         function saveChanges(){
             manager.saveChanges();
         }
-    });
+
+        function addImage(image, callback){
+            var Image = $resource("http://localhost\\:25792/breeze/Image/AddImage")
+            var newImage = new Image();
+            newImage.ImageResource = image;
+            newImage.$save(function(result){
+                   callback(result);
+            });
+            ;
+        }
+    }]);
 });
 
 

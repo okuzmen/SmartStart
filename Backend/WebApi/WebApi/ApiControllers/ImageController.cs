@@ -18,16 +18,14 @@ namespace WebApi.ApiControllers
             this.repository = repository;
         }
 
-        //[HttpGet]
-        //public string GetImagePath(Guid id)
-        //{
-        //    return repository.GetAll();
-        //}
-
-        [HttpGet]
-        public string[] AddImage(string encodedImage)
+        [HttpPost]
+        public JObject AddImage(JObject imageObject)
         {
-            return repository.Add(encodedImage);
+            var image = imageObject.ToObject<Image>();
+            var result = repository.Add(image.Get64BaseString());
+
+            return JObject.FromObject(result);
+
         }
     }
 }

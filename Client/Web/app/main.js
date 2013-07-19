@@ -13,7 +13,9 @@ require.config({
             breeze : "lib/breeze/breeze.debug",
             domReady: "lib/domReady/domReady",
             Q : "lib/qjs/q",
-            lightbox: "lib/lightbox/lightbox-2.6.min"
+            lightbox: "lib/lightbox/lightbox-2.6.min",
+            angularResources : "lib/angular/angular-resource.min"
+
         },
         shim: {
             angular : {
@@ -27,6 +29,10 @@ require.config({
             lightbox : {
                 deps : ["jquery"],
                 exports: "lightbox"
+            },
+            angularResources: {
+                deps : ["jquery"],
+                exports: "angularResources"
             }
         },
         priority: [

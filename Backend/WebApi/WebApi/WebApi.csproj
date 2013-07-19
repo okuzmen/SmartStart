@@ -109,6 +109,8 @@
     <Compile Include="Models\ContextProvider.cs" />
     <Compile Include="Infrastructure\IoCContainer.cs" />
     <Compile Include="Infrastructure\ScopeContainer.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\ImagePath.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\SmartStartContextInitializer.cs" />
     <Compile Include="Models\SmartStartDbContext.cs" />
